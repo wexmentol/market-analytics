@@ -1,21 +1,72 @@
 import streamlit as st
 import pandas as pd
 import sqlite3
-import subprocess
+import requests
+from datetime import datetime
 
 st.set_page_config(page_title="Market Analytics Pro", layout="wide")
+
+DB_NAME = "market_data.db"
+
+# --- INTERNETDAN REAL MA'LUMOT OLISH FUNKSIYASI ---
+def get_and_save_data():
+    url = "https://fakestoreapi.com/products"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+    try:
+        response = requests.get(url, headers=headers, timeout=15)
+        if response.status_code == 200:
+            products = response.json()
+            
+            # Bazani ochamiz va jadvalni yaratamiz
+            conn = sqlite3.connect(DB_NAME)
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS products (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nomi TEXT,
+                    narxi REAL,
+                    sotilgan INTEGER,
+                    sana TEXT
+                )
+            ''')
+            
+            bugun = datetime.now().strftime("%Y-%m-%d")
+            
+            # Ma'lumotlarni bazaga yozamiz
+            for prod in products:
+                title = prod.get('title')
+                price = prod.get('price', 0) * 12500  # so'mga simulyatsiya
+                orders = prod.get('rating', {}).get('count', 0)
+                
+                cursor.execute('''
+                    INSERT INTO products (nomi, narxi, sotilgan, sana)
+                    VALUES (?, ?, ?, ?)
+                ''', (title, price, orders, bugun))
+                
+            conn.commit()
+            conn.close()
+            return True
+    except Exception as e:
+        st.sidebar.error(f"Xatolik: {e}")
+        return False
+    return False
 
 # Sarlavha qismi
 st.title("📊 Market Analytics & Price Tracker Platforma")
 st.caption("Startap loyihangizning qidiruv va filtrlarga ega ilg'or MVP modeli")
 
-# --- INTERNETDA MAJBURIY ISHGA TUSHIRISH TUGMASI ---
+# --- MAJBURIY YANGILASH TUGMASI ---
 st.sidebar.header("🔄 Ma'lumotlar yangilash")
 if st.sidebar.button("Bazani yangilash"):
-    st.sidebar.info("Skraper ishga tushdi, biroz kuting...")
-    subprocess.run(["python", "scraper.py"])
-    st.sidebar.success("Ma'lumotlar bazaga muvaffaqiyatli yuklandi!")
-    st.rerun()
+    with st.sidebar.spinner("Internetdan ma'lumot yuklanmoqda..."):
+        success = get_and_save_data()
+        if success:
+            st.sidebar.success("Ma'lumotlar bazaga yuklandi!")
+            st.rerun()
+        else:
+            st.sidebar.error("Yuklashda xatolik bo'ldi.")
 
 st.sidebar.markdown("---")
 
@@ -26,11 +77,12 @@ platforma = st.sidebar.selectbox("Platformani tanlang:", ["Uzum Market", "OLX", 
 st.markdown(f"### 📍 Hozirgi tanlangan platforma: **{platforma}**")
 
 def load_data_from_db():
-    conn = sqlite3.connect("market_data.db")
+    conn = sqlite3.connect(DB_NAME)
     df = pd.read_sql_query("SELECT nomi, narxi, sotilgan, sana FROM products", conn)
     conn.close()
     return df
 
+# Asosiy qism: ma'lumotlarni tekshirish va chiqarish
 try:
     df = load_data_from_db()
     
