@@ -147,33 +147,32 @@ try:
 
 except Exception as e:
     st.warning("Grafikni chizish uchun ma'lumotlar yetarli emas yoki xato yuz berdi.")
+# --- GRAFIK QISMINI MANA SHUNDAY TO'LIQ ALMASHTIRING ---
 
-# Rang-barang (qizil-ko'k-sariq jiloli) 
-fig = px.bar(
-    x="nomi", 
-    y="narxi", 
-    color="narxi", # Narxiga qarab avtomatik rang beriladi
-    labels={"nomi": "Mahsulot nomi", "narxi": "Narxi (so'm)"},
-    color_continuous_scale=px.colors.sequential.Plasma # ranglar gammasi (ko'k, binafsha, qizil, sariq)
-)
-
-# Grafik dizaynini saytning qora foni bilan moslashtirish
-fig.update_layout(
-    template="plotly_dark",
-    xaxis_tickangle=-45,
-    margin=dict(l=20, r=20, t=20, b=100)
-)
-
-# Grafikni saytda ko'rsatish
-st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.error("Bunday nomdagi mahsulot bazadan topilmadi!")
-            
-    else:
-        st.warning("⚠️ Bazada ma'lumot yo'q! Iltimos, chap tarafdagi 'Bazani yangilash' tugmasini bosing.")
+try:
+    st.subheader("📊 Mahsulotlarning narxlari solishtirmasi (Top 10)")
+    top_10 = df.head(10)
+    
+    # Rang-barang interaktiv grafik
+    fig = px.bar(
+        top_10, 
+        x="nomi", 
+        y="narxi", 
+        color="narxi", 
+        labels={"nomi": "Mahsulot nomi", "narxi": "Narxi (so'm)"},
+        color_continuous_scale=px.colors.sequential.Plasma
+    )
+    
+    fig.update_layout(
+        template="plotly_dark",
+        xaxis_tickangle=-45,
+        margin=dict(l=20, r=20, t=20, b=100)
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
 
 except Exception as e:
-    st.warning("⚠️ Baza hali yaratilmagan! Iltimos, chap tarafdagi 'Bazani yangilash' tugmasini bosing.")
-# app.py ichidagi hamma grafiklar kodidan keyin joylashtiring:
-st.markdown("---")
+    st.warning("Grafikni chizish uchun ma'lumotlar yetarli emas yoki xato yuz berdi.")
+
+
 st.markdown("<p style='text-align: center; color: gray; font-size: 14px;'>© 2026 GOFUROV FAYOZBEK | Dasturchi va Startup loyihalar asoschisi</p>", unsafe_allow_html=True)
