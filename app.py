@@ -121,11 +121,9 @@ try:
             st.dataframe(df, use_container_width=True)
 
         st.subheader("📊 Mahsulotlarning narxlari solishtirmasi (Top 10)")
-top_10 = df.head(10)
 
 # Rang-barang (qizil-ko'k-sariq jiloli) 
 fig = px.bar(
-    top_10, 
     x="nomi", 
     y="narxi", 
     color="narxi", # Narxiga qarab avtomatik rang beriladi
