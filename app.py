@@ -52,8 +52,7 @@ if st.sidebar.button("Bazani yangilash"):
 
 st.sidebar.markdown("---")
 st.sidebar.title("⚙️ Boshqaruv Paneli")
-platforma = st.sidebar.selectbox("Platformani tanlang:", ["Uzum Market"]), ["OLX"]), ["ALIBABA"]), ["YANDEX"])
-
+platforma = st.sidebar.selectbox("Platformani tanlang:", ["Uzum Market"])
 st.markdown(f"### 📍 Hozirgi tanlangan platforma: {platforma} 🔗")
 
 # Aqlli qidiruv va filtrlash
