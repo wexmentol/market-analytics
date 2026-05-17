@@ -54,9 +54,9 @@ def get_and_save_data():
     return False
 
 # Sarlavha qismi
-st.title("📊 Market Analytics & Price Tracker Platforma")
-st.caption("Startap loyihangizning qidiruv va filtrlarga ega ilg'or MVP modeli")
-
+# --- MANA SHU YANGI KODNI QO'SH: ---
+st.markdown("### 👨‍💻 Loyiha muallifi: **GOFUROV FAYOZBEK**")
+st.markdown(" DASTURCHI va STARTUP LOYIHALAR ASOSCHISI")
 # --- MAJBURIY YANGILASH TUGMASI ---
 st.sidebar.header("🔄 Ma'lumotlar yangilash")
 if st.sidebar.button("Bazani yangilash"):
