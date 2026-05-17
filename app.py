@@ -120,35 +120,10 @@ try:
             st.subheader("📋 Filtrlangan mahsulotlar ro'yxati")
             st.dataframe(df, use_container_width=True)
 
-        st.subheader("📊 Mahsulotlarning narxlari solishtirmasi (Top 10)")
-        # --- GRAFIK QISMINI MANA SHUNDAY TO'LIQ ALMASHTIRING ---
-
-try:
-    st.subheader("📊 Mahsulotlarning narxlari solishtirmasi (Top 10)")
-    top_10 = df.head(10)
-    
-    # Rang-barang interaktiv grafik
-    fig = px.bar(
-        top_10, 
-        x="nomi", 
-        y="narxi", 
-        color="narxi", 
-        labels={"nomi": "Mahsulot nomi", "narxi": "Narxi (so'm)"},
-        color_continuous_scale=px.colors.sequential.Plasma
-    )
-    
-    fig.update_layout(
-        template="plotly_dark",
-        xaxis_tickangle=-45,
-        margin=dict(l=20, r=20, t=20, b=100)
-    )
-    
-    st.plotly_chart(fig, use_container_width=True)
-
-except Exception as e:
 st.subheader("📊 Mahsulotlarning narxlari solishtirmasi (Top 10)")
 top_10 = df.head(10)
 
 fig = px.bar(top_10, x="nomi", y="narxi", color="narxi", color_continuous_scale=px.colors.sequential.Plasma)
 st.plotly_chart(fig, use_container_width=True)
+
 st.markdown("<p style='text-align: center; color: gray; font-size: 14px;'>© 2026 GOFUROV FAYOZBEK | Dasturchi va Startup loyihalar asoschisi</p>", unsafe_allow_html=True)
