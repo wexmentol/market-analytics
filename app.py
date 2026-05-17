@@ -128,3 +128,6 @@ try:
 
 except Exception as e:
     st.warning("⚠️ Baza hali yaratilmagan! Iltimos, chap tarafdagi 'Bazani yangilash' tugmasini bosing.")
+# app.py ichidagi hamma grafiklar kodidan keyin joylashtiring:
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: gray; font-size: 14px;'>© 2026 GOFUROV FAYOZBEK | Dasturchi va Startup loyihalar asoschisi</p>", unsafe_allow_html=True)
