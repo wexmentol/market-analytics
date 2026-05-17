@@ -54,7 +54,10 @@ def get_and_save_data():
     return False
 
 # Sarlavha qismi
-# --- MANA SHU YANGI KODNI QO'SH: ---
+
+st.title("📊 BOZOR TAHLILCHISI VA NARXLARNI KUZATUVCHI SAYT")
+st.caption("Startap loyihaning ega ilg'or modeli")
+
 st.markdown("### 👨‍💻 Loyiha muallifi: **GOFUROV FAYOZBEK**")
 st.markdown(" DASTURCHI va STARTUP LOYIHALAR ASOSCHISI")
 # --- MAJBURIY YANGILASH TUGMASI ---
