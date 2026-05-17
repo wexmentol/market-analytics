@@ -8,7 +8,7 @@ import plotly.express as px
 st.set_page_config(page_title="Market Analytics Pro", page_icon="📊", layout="wide")
 
 
-st.title("📊 [BOZOR TAHLILCHISI VA NARXLARNI KUZATUVCHI SAYT]")
+st.title("📊 BOZOR TAHLILCHISI VA NARXLARNI KUZATUVCHI SAYT")
 st.caption("Startup loyihaylarning eng ilg'or modeli")
 
 st.markdown("---")
