@@ -111,4 +111,4 @@ if not df.empty:
 
 # Ostki qism (Footer)
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: gray; font-size: 14px;'>© 2026 Fayozbek Napalionov | Dasturchi va G'oya muallifi</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray; font-size: 14px;'>© 2026 FAYOZBEK GOFUROV | Dasturchi va G'oya muallifi</p>", unsafe_allow_html=True)
