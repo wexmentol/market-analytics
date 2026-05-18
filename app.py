@@ -11,7 +11,7 @@ st.title("📊 BOZOR TAHLILCHISI VA NARXLARNI  KUZATUVCHI SAYT")
 st.caption("Bozordagi mahsulotlarni tahlil qiluvchi ilg'or startap platforma")
 
 st.markdown("---")
-st.markdown("### 👨‍💻 Loyiha muallifi: **GOFUROV FAYOZBEK**")
+st.markdown("### 👨‍💻 DASTURCHI **GOFUROV FAYOZBEK**")
 st.caption("DASTURCHI VA STARTUP LOYIHALAR ASOSCHISI")
 st.markdown("---")
 
